@@ -1,7 +1,14 @@
 <div class="main-content">
     <div class="section-content section-content-p30">
 
-        <h4>Category: {{ currentCategoryName }}</h4>
+        <h4 *ngIf="!searchMode">
+            Category: {{ currentCategoryName }}
+        </h4>
+
+        <h4 *ngIf="searchMode">
+            Search results:
+        </h4>
+
         <hr>
 
         <div class="container-fluid">
@@ -15,6 +22,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+            No products found.
         </div>
     </div>
 </div>
