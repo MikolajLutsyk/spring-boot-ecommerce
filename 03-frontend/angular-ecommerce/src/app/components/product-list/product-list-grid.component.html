@@ -25,11 +25,38 @@
                         <a href="#" class="primary-btn">Add to cart</a>
                     </div>
                 </div>
+                <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                    No products found.
+                </div>
             </div>
-        </div>
+            <div class="footer-pagination">
+                <div class="row">
+                    <div class="col-md-6"></div>
 
-        <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
-            No products found.
+                    <div class="col-md-6 mx-auto">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-md-9 d-flex justify-content-center">
+                                <ngb-pagination [(page)]="pageNumber" [(pageSize)]="pageSize"
+                                    [(collectionSize)]="totalElements" [maxSize]="4" [boundaryLinks]="true"
+                                    (pageChange)="listProducts()">
+                                </ngb-pagination>
+                            </div>
+
+                            <div class="col-md-3 mt-2 d-flex justify-content-end align-items-center">
+                                <span class="mr-2">Page size</span>
+                                <select class="form-select w-auto" #myPageSelect
+                                    (change)="updatePageSize(myPageSelect.value)">
+                                    <option selected="true">5</option>
+                                    <option>10</option>
+                                    <option>20</option>
+                                    <option>50</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

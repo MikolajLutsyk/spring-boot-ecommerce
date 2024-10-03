@@ -13,7 +13,15 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   currentCategoryName: string = "";
   currentCategoryId: number = 1;
+  previousCategoryId: number = 1;
   searchMode: boolean = false;
+
+  //pagination properties
+  pageNumber: number = 1;
+  pageSize: number = 5;
+  totalElements: number = 0;
+
+  previousKeyword: string = "";
 
   constructor(private productService: ProductService,
     private route: ActivatedRoute
@@ -40,11 +48,16 @@ export class ProductListComponent implements OnInit {
     const theKeyword: string = this.route.snapshot.paramMap.get('keyword');
 
 
+    if (this.previousKeyword != theKeyword) {
+      this.pageNumber = 1;
+    }
 
-    this.productService.searchProducts(theKeyword).subscribe(
-      data => {
-        this.products = data
-      }
+    this.previousKeyword = theKeyword;
+
+    console.log(`keyword=${theKeyword}, pageNumber=${this.pageNumber}`);
+
+    this.productService.searchProductsPaginate(this.pageNumber - 1, this.pageSize, theKeyword).subscribe(
+      this.processResult()
     )
   }
 
@@ -59,10 +72,31 @@ export class ProductListComponent implements OnInit {
       this.currentCategoryId = 1;
       this.currentCategoryName = "Books";
     }
-    this.productService.getProductList(this.currentCategoryId).subscribe(
-      data => {
-        this.products = data;
-      }
+
+    if (this.currentCategoryId != this.previousCategoryId) {
+      this.pageNumber = 1;
+    }
+
+    this.previousCategoryId = this.currentCategoryId;
+    console.log(`currentCategoryId = ${this.currentCategoryId}, pageNumber = ${this.pageNumber}`);
+
+    this.productService.getProductListPaginate(this.pageNumber - 1, this.pageSize, this.currentCategoryId).subscribe(
+      this.processResult()
     )
+  }
+
+  updatePageSize(pageSize: number) {
+    this.pageSize = pageSize;
+    this.pageNumber = 1;
+    this.listProducts();
+  }
+
+  processResult() {
+    return (data: any) => {
+      this.products = data._embedded.products;
+      this.pageNumber = data.page.number + 1;
+      this.pageSize = data.page.size;
+      this.totalElements = data.page.totalElements;
+    }
   }
 }
