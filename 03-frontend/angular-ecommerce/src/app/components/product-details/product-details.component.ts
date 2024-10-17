@@ -39,6 +39,5 @@ export class ProductDetailsComponent implements OnInit {
 
     const cartItem = new CartItem(this.product);
     this.cartService.addToCart(cartItem);
-
   }
 }
