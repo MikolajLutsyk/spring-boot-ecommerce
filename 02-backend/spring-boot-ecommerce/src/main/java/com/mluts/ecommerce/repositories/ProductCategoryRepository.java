@@ -1,4 +1,4 @@
-package com.mluts.ecommerce.dao;
+package com.mluts.ecommerce.repositories;
 
 import com.mluts.ecommerce.entity.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;

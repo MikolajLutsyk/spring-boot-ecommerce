@@ -1,4 +1,4 @@
-package com.mluts.ecommerce.dao;
+package com.mluts.ecommerce.repositories;
 
 import com.mluts.ecommerce.entity.Product;
 import org.springframework.data.domain.Page;
