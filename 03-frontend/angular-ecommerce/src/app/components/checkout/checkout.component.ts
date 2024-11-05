@@ -34,6 +34,9 @@ export class CheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.reviewCartDetails();
+
     //form group building and validating
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
@@ -188,5 +191,19 @@ export class CheckoutComponent implements OnInit {
         formGroup.get('state').setValue(data[0]);
       }
     );
+  }
+
+  reviewCartDetails() {
+
+    //subscribe to total quantity
+    this.cartService.totalQuantity.subscribe(
+      totalQuantity => this.totalQuantity = totalQuantity
+    );
+
+    //subscribe to total price
+    this.cartService.totalPrice.subscribe(
+      totalPrice => this.totalPrice = totalPrice
+    );
+
   }
 }
