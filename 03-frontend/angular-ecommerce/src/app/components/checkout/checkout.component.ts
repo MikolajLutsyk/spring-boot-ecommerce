@@ -157,13 +157,17 @@ export class CheckoutComponent implements OnInit {
     purchase.order = order;
 
     //populate purchase - shipping address
+    //getting shipping address value from checkout form's control 
     purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;
+    //getting objects of state and country from shipping address because they get from formgroup in shape of arrays (they are dropdown lists populated by data from the database)
     const shippingState: State = JSON.parse(JSON.stringify(purchase.shippingAddress.state));
     const shippingCountry: Country = JSON.parse(JSON.stringify(purchase.shippingAddress.country));
+    //extracting string values for name from the objects
     purchase.shippingAddress.state = shippingState.name;
     purchase.shippingAddress.country = shippingCountry.name;
 
     //populate purchase - billing address
+    //same mechanism as in shipping address
     purchase.billingAddress = this.checkoutFormGroup.controls['billingAddress'].value;
     const billingState: State = JSON.parse(JSON.stringify(purchase.billingAddress.state));
     const billingCountry: Country = JSON.parse(JSON.stringify(purchase.billingAddress.country));
@@ -179,11 +183,13 @@ export class CheckoutComponent implements OnInit {
 
     //call REST API with service
     this.chekoutService.placeOrder(purchase).subscribe({
+      //if call to API was successful
       next: responce => {
         alert(`Your order has been recieved.\nOrder tracking number: ${responce.orderTrackingNumber}`);
 
         this.resetCart();
       },
+      //if it caused an error
       error: err => {
         alert(`There was an error: ${err.message}`);
       }
@@ -262,6 +268,7 @@ export class CheckoutComponent implements OnInit {
   resetCart() {
     //reset cart data
     this.cartService.cartItems = [];
+    //zeroing totalprice and totalQuantity in BehaviourSubject using next() method
     this.cartService.totalPrice.next(0);
     this.cartService.totalQuantity.next(0);
 
@@ -270,6 +277,5 @@ export class CheckoutComponent implements OnInit {
 
     //navigate back to the products page
     this.router.navigateByUrl("/products");
-
   }
 }

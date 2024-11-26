@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/product.service';
 
 import { Routes, RouterModule } from '@angular/router';
@@ -16,6 +16,13 @@ import { CartStatusComponent } from './components/cart-status/cart-status.compon
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginStatusComponent } from './components/login-status/login-status.component';
+
+import { AuthGuard, AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import myAppConfig from './config/my-app-config';
+
+
 
 const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
@@ -33,22 +40,29 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     ProductListComponent,
-    ProductCategoryMenuComponent,
-    SearchComponent,
     ProductDetailsComponent,
+    ProductCategoryMenuComponent,
+    CheckoutComponent,
     CartStatusComponent,
     CartDetailsComponent,
-    CheckoutComponent
+    SearchComponent,
+    LoginStatusComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AuthModule.forRoot({
+      ...myAppConfig.auth,
+      // cacheLocation: 'localstorage',
+      httpInterceptor: {
+        ...myAppConfig.httpInterceptor,
+      },
+    })
   ],
-  providers: [ProductService],
+  providers: [ProductService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true, },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
