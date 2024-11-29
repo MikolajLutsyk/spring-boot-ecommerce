@@ -1,0 +1,95 @@
+/* Header container */
+.header-wrap {
+    display: flex;
+    /* Use flexbox to layout elements */
+    align-items: center;
+    /* Vertically align all components */
+    justify-content: space-between;
+    /* Spread components evenly */
+    gap: 20px;
+    /* Spacing between components */
+    padding: 10px 20px;
+    height: 60px;
+    /* Set a consistent height for the header */
+    box-sizing: border-box;
+    /* Include padding in width calculation */
+}
+
+/* Search component container */
+.form-header {
+    display: flex;
+    /* Align input and button horizontally */
+    align-items: center;
+    /* Vertically align input and button */
+    flex-grow: 1;
+    /* Allow the search bar to grow and take up space */
+    max-width: 600px;
+    /* Limit width for large screens */
+    min-width: 300px;
+    /* Prevent search bar from being too small */
+    gap: 10px;
+    /* Add space between input and button */
+}
+
+/* Search input styling */
+.form-header input {
+    flex-grow: 1;
+    /* Input takes most of the space */
+    height: 40px;
+    /* Set consistent height */
+    border: 1px solid #ccc;
+    /* Add border for clarity */
+    border-radius: 20px;
+    padding: 0 15px;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Optional shadow */
+}
+
+/* Search button styling */
+.form-header button {
+    height: 40px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #205b8d;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-header button:hover {
+    background-color: #2874a6;
+}
+
+/* Login status styling */
+app-login-status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    /* Space between elements */
+    white-space: nowrap;
+    /* Prevent wrapping */
+    min-width: 150px;
+    /* Ensure enough space for user name */
+}
+
+/* Cart status styling */
+app-cart-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* Space between cart icon and text */
+}
+
+app-cart-status span {
+    font-size: 14px;
+}
+
+app-cart-status img {
+    width: 20px;
+    /* Ensure consistent cart icon size */
+    height: auto;
+}

@@ -21,10 +21,13 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 import { AuthGuard, AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import myAppConfig from './config/my-app-config';
+import { MembersPageComponent } from './components/members-page/members-page.component';
 
 
 
 const routes: Routes = [
+  { path: 'members', component: MembersPageComponent, canActivate: [AuthGuard] },
+
   { path: 'checkout', component: CheckoutComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
   { path: 'cart-details', component: CartDetailsComponent },
@@ -46,7 +49,8 @@ const routes: Routes = [
     CartStatusComponent,
     CartDetailsComponent,
     SearchComponent,
-    LoginStatusComponent
+    LoginStatusComponent,
+    MembersPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

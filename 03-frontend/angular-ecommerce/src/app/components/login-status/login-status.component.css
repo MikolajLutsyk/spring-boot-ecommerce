@@ -1,32 +1,45 @@
 .security-btn {
     position: relative;
-    right: 0;
-    min-width: 95px;
+    min-width: 85px;
+    /* Adjust for a better button size */
+    padding: 10px 15px;
+    /* Add padding for inner spacing */
     color: #fff;
-    border: 10px solid #205b8d;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 43px;
-    background: #205b8d
+    border: none;
+    /* Remove the thick border */
+    border-radius: 20px;
+    /* Slightly rounded corners */
+    background: #205b8d;
+    /* Keep the same background color */
+    cursor: pointer;
+    /* Ensure it's styled as a button */
+    text-align: center;
+    font-size: 14px;
+    /* Adjust text size */
+    transition: background 0.3s ease;
+    /* Smooth hover effect */
+}
+
+.security-btn:hover {
+    background: #2874a6;
+    /* Slightly lighter shade for hover */
 }
 
 .login-status-header {
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center
+    display: flex;
+    align-items: center;
+    /* Align items vertically */
+    justify-content: flex-end;
+    /* Align items to the right */
+    gap: 10px;
+    /* Add spacing between buttons */
 }
 
 .login-status-user-info {
-    line-height: 43px;
-    border: 1px;
-    padding: 0 17px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-    transition: all .5s ease
+    line-height: 1.5;
+    padding: 0 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    /* Adjust text color */
 }
