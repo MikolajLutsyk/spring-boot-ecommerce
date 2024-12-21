@@ -1,9 +1,6 @@
 package com.mluts.ecommerce.config;
 
-import com.mluts.ecommerce.entity.Country;
-import com.mluts.ecommerce.entity.Product;
-import com.mluts.ecommerce.entity.ProductCategory;
-import com.mluts.ecommerce.entity.State;
+import com.mluts.ecommerce.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +37,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(ProductCategory.class, config, unsupportedActions);
         disableHttpMethods(Country.class, config, unsupportedActions);
         disableHttpMethods(State.class, config, unsupportedActions);
+        disableHttpMethods(Order.class, config, unsupportedActions);
 
         exposeIds(config);
 
